@@ -17,10 +17,21 @@ if char.isdigit():
     if i < len(text) and text[i] == '.':
         i+= 1
         if i>= len(text) or not text[i].isdigit():
-            raie ValueError (f"bad number format at position {start}")
+            raise ValueError (f"bad number format at position {start}")
         while i< len(text) or not text[i].isdigit():
             i+= 1
         tokens.append(('NUMBER', float(text[start:i])))
         continue
-    
-     
+
+     if char in '+-*/()':
+        tokens.append((char, char))
+        i+= 1
+        continue
+
+    if char == "(":
+        tokens.append(('LPAREN', char))
+        i+= 1
+        continue
+
+    if char == ")":
+        
