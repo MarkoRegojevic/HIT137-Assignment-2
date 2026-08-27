@@ -6,10 +6,21 @@ def tokenize(text):
     while i < len(text):
         char=text[i]
 if char.isspace():
-    i==1+ 
+    i +=1 
     continue
 
 if char.isdigit():
     start=i
     while i < len(text) and text[i].isdigit():
-        
+       i+= 1
+
+    if i < len(text) and text[i] == '.':
+        i+= 1
+        if i>= len(text) or not text[i].isdigit():
+            raie ValueError (f"bad number format at position {start}")
+        while i< len(text) or not text[i].isdigit():
+            i+= 1
+        tokens.append(('NUMBER', float(text[start:i])))
+        continue
+    
+     
