@@ -26,7 +26,8 @@ if char.isdigit():
  #   This block will deal wit the plus and minus
  def expression(tokens, position): 
     left, position = term(tokens, position)
-    while tokens [position][1] in ('+', '-'):
+
+    while tokens [position][0] == "OP" and tokens [position][1] in ("+", "-"):
         operator = tokens[position][1]
         right, position = term(tokens, position + 1)
         left = (operator, left, right)
