@@ -46,10 +46,11 @@ while true:
     elif tokens[position][0] == "NUM" :
         raise ValueError()
     
-elif tokens[position][0] == "LPAREN":
-right, position = unary(tokens, position)
-left = ("*", left, right) 
-else: 
-    break
-return left, position 
+    elif tokens[position][0] == "LPAREN":
+        right, position = unary(tokens, position)
+        left = ("*", left, right) 
+    else: 
+        break
+    
+    return left, position 
 
