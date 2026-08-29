@@ -42,3 +42,17 @@ if char.isdigit():
 tokens.append(('EOF', None))
 return tokens
 
+def expression(tokens, position):
+    left, position = term(tokens, position)
+    while tokens [position][0] in ('+', '-'):
+        op = tokens[position][0]
+        position += 1
+        right, position = term(tokens, position)
+        if op == '+':
+            left += right
+        else:
+            left -= right
+
+def start_primary(token):
+    return token[0] == 'NUMBER' or token[0] == 'LPAREN'
+
