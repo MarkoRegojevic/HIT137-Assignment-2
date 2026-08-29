@@ -51,6 +51,6 @@ while true:
         left = ("*", left, right) 
     else: 
         break
-    
+
     return left, position 
 
