@@ -21,14 +21,17 @@ if char.isdigit():
             i+= 1
         tokens.append(('NUMBER', float(text[start:i])))
         continue
+
      if char in '+-*/()':
         tokens.append((char, char))
         i+= 1
         continue
+
     if char == "(":
         tokens.append(('LPAREN', char))
         i+= 1
         continue
+
     if char == ")":
         tokens.append(('RPAREN', char))
         i+= 1
@@ -38,5 +41,4 @@ if char.isdigit():
 
 tokens.append(('EOF', None))
 return tokens
-
 
