@@ -53,6 +53,18 @@ while true:
 
     return left, position 
 
-/////////////// #jacobs part next 
+/////////////// #jacobs part next
+
+# This block deals with negative numbers 
+
+
+# This block will deal with powers
+
+
+#This block deals with numbers and brackets 
+
+
+
+
 
 
