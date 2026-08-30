@@ -52,5 +52,4 @@ while true:
     else: 
         break
 
-    return left, position 
-
+    return left, position
