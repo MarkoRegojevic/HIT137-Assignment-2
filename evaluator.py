@@ -59,16 +59,12 @@ while true:
 def unary(tokens, position):
 
     if tokens[position][0] == "OP":
-
         if tokens[position][1] == "-":
             answer, position = unary(tokens, position + 1)
             return ("neg", answer), position
-
         if tokens[position][1] == "+":
             raise ValueError()
-
     return power(tokens, position)
-
 
 # This block will deal with powers
 def power (tokens, position):
@@ -82,25 +78,63 @@ def power (tokens, position):
 
     return left, position
 
-
 #This block deals with numbers and brackets 
 def primary (tokens, position):
-
     if tokens[position][0] == "NUM":
         number = float(tokens[position][1])
         return number, position + 1
-
     if tokens[position][0] == "LPAREN":
         answer, position = expression(tokens, position + 1)
-
         if tokens[position][0] != "RPAREN":
             raise ValueError
-
         return,answer, position +1
-
 raise ValueError ()
 
+////// markos part next
+
+# works out the answer from the tree
 
 
 
 
+# changes the tree into the format needed by the assginment
+
+
+
+#changes tokens into required format
+
+
+////// jacobs part next
+
+
+# makes the result look like the required format
+def result_string(number):
+    if number.is_integer():
+        return str(int(number))
+
+    return str(round(number, 4))
+
+# evalutes one line
+def evaluate_line(line):
+    try: 
+        tokens = tokenize(line)
+
+        if len(tokens) == 1:
+            raise ValueError
+
+        tree, position = expression(tokens, 0)
+
+        # ensures the entire line was read 
+        if tokens[position][0] != "END":
+            raise ValueError
+
+        answer = calculate(tree)
+
+        return {
+            "input": line,
+            "tree": tree_string(tree),
+            "tokens": token_string (tokens),
+            "result": answer
+        }
+
+    
