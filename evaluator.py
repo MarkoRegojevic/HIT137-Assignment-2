@@ -81,14 +81,46 @@ def power (tokens, position):
 #This block deals with numbers and brackets 
 
 ////// markos part next
+#This function block of code will work out the answer from the tree 
+def calculate(tree): 
 
-# works out the answer from the tree
+    if isinstance(tree, float): #If the tree is jsut a number then return the number
+        return tree
+    if tree[0] == "neg": #If the tree is a negative number then return the negative of the number
+        return -calculate(tree[1])
 
+    operator = tree[0] 
+    left = calculate(tree[1])
+    right = calculate(tree[2])
 
+    if operator == "+":
+        return left + right
+    elif operator == "-":
+        return left - right
+    elif operator == "*":
+        return left * right
+    elif operator == "/":
+        if right == 0: 
+            raise ZeroDivisionError()
+        return left / right
+    elif operator == "%":
+        if right == 0: 
+            raise ZeroDivisionError()
+        return left % right
+    elif operator == "^":
+        return left ** right
 
+    raise ValueError() # So if none of the above conditions work, then there will be an error
 
-# changes the tree into the format needed by the assginment
+# This function block of code will chagne the tree into the format for the output file 
+def tree_string(tree): 
+    if isinstance(tree, float):
+        return str(tree)
 
+    return str(tree)
+if tree[0] == "neg":
+    return "(neg " + tree_string(tree[1]) + ")"
+return "(" + tree[0] + " " + tree_string(tree[1]) + " " + tree_string(tree[2]) + ")" 
 
 
 #changes tokens into required format
@@ -124,7 +156,5 @@ def evaluate_line(line):
             "input": line,
             "tree": tree_string(tree),
             "tokens": token_string (tokens),
-            "result": answer
-        }
-
+            "result": answer}
     
