@@ -51,7 +51,7 @@ while true:
     else: 
         break
 
-    return left, position 
+    return left, positionn 
 
 /////////////// #jacobs part next
 
