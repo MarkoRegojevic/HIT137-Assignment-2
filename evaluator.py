@@ -22,36 +22,37 @@ if char.isdigit():
         tokens.append(('NUMBER', float(text[start:i])))
         continue
 
-     if char in '+-*/()':
-        tokens.append((char, char))
-        i+= 1
-        continue
-
-    if char == "(":
-        tokens.append(('LPAREN', char))
-        i+= 1
-        continue
-
-    if char == ")":
-        tokens.append(('RPAREN', char))
-        i+= 1
-        continue
-
-    raise ValueError(f"Unknown character {char} at position {i}")
-
-tokens.append(('EOF', None))
-return tokens
-
-def expression(tokens, position):
+ #   This block will deal wit the plus and minus
+ def expression(tokens, position): 
     left, position = term(tokens, position)
-    while tokens [position][0] in ('+', '-'):
-        op = tokens[position][0]
-        position += 1
-        right, position = term(tokens, position)
-        if op == '+':
-            left += right
-        else:
-            left -= right
+
+    while tokens [position][0] == "OP" and tokens [position][1] in ("+", "-"):
+        operator = tokens[position][1]
+        right, position = term(tokens, position + 1)
+        left = (operator, left, right)
+    return left, position 
+
+# This block will deal with multuplication, division and remainder, and also implicit multiplication. . 
+def term(tokens, position): 
+    left, position = unary(tokens, position) 
+
+while true: 
+    if tokens[position][0] == "OP" and tokens[position][1] in ("*", "/", "%"):
+        operator = tokens[position][1]
+        right, position = unary(tokens, position + 1)
+        left = (operator, left, right)
+
+    elif tokens[position][0] == "NUM" :
+        raise ValueError()
+    
+    elif tokens[position][0] == "LPAREN":
+        right, position = unary(tokens, position)
+        left = ("*", left, right) 
+    else: 
+        break
 
     return left, position 
+
+/////////////// #jacobs part next 
+
 
