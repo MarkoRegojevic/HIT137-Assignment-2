@@ -56,6 +56,23 @@ while true:
 /////////////// #jacobs part next
 
 # This block deals with negative numbers 
+def unary(tokens, position):
+
+    if tokens[position][0] == 'OP':
+
+        if tokens[position][1] == "-":
+            answer, position = unary(tokens, position + 1)
+            return ("neg", answer), position
+
+        if tokens[position][1] ++ "+":
+            raise ValueError()
+
+    return power(tokens, position)
+
+
+
+
+
 
 
 # This block will deal with powers
