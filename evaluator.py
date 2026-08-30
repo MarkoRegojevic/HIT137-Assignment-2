@@ -51,18 +51,40 @@ while true:
     else: 
         break
 
-    return left, positionn
+    return left, position
 
 /////////////// #jacobs part next
 
 # This block deals with negative numbers 
+def unary(tokens, position):
+
+    if tokens[position][0] == "OP":
+
+        if tokens[position][1] == "-":
+            answer, position = unary(tokens, position + 1)
+            return ("neg", answer), position
+
+        if tokens[position][1] == "+":
+            raise ValueError()
+
+    return power(tokens, position)
 
 
 # This block will deal with powers
+def power (tokens, position):
+
+    left, position = primary(tokens, position)
+
+    if tokens[position][0] == "OP":
+        if tokens[position][1] == "^":
+            right, position = unary(tokens, position +1)
+            left = ("^", left, right)
+
+    return left, position
 
 
 #This block deals with numbers and brackets 
-# need to update 
+
 
 
 
