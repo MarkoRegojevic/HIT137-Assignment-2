@@ -18,7 +18,7 @@ def tokenize(text):
             start = i
 
             while i < len(text) and text[i].isdigit():
-            i += 1
+                i += 1
 
             if i < len(text) and text[i] == '.':
                 i += 1
@@ -26,19 +26,19 @@ def tokenize(text):
                 if i>= len(text) or not text[i].isdigit():
                     raise ValueError()
 
-                while i< len(text) or not text[i].isdigit():
+                while i < len(text) and not text[i].isdigit():
                     i+= 1
 
             tokens.append(("NUM", text[start:i]))
             continue
 
         if char in "+-*/%^":
-            token.append(("OP",char))
+            tokens.append(("OP",char))
             i += 1 
             continue
 
         if char == "(": 
-            tokens.append(("LPAREN", cahr))
+            tokens.append(("LPAREN", char))
             i += 1 
             continue
         if char == ")":
@@ -48,8 +48,8 @@ def tokenize(text):
 
         raise ValueError()
 
-tokens.append(("END", ""))
-return tokens 
+    tokens.append(("END", ""))
+    return tokens 
 
 
  #   This block will deal wit the plus and minus
@@ -266,7 +266,7 @@ def evaluate_file(input_path: str):
 
         with open(output_path, "w") as file: 
 
-            for i in range(len(results)):
+            for i, result in enumerate(results):
 
                 file.write("Input: " + result["input"] + "\n")
                 file.write("Tree: " + result["tree"] + "\n")
