@@ -80,6 +80,10 @@ def power (tokens, position):
 
 #This block deals with numbers and brackets 
 
+
+
+
+
 ////// markos part next
 #This function block of code will work out the answer from the tree 
 def calculate(tree): 
@@ -124,7 +128,11 @@ return "(" + tree[0] + " " + tree_string(tree[1]) + " " + tree_string(tree[2]) +
 
 
 #changes tokens into required format
+def token_string(tokens):
+    answer = []
 
+    for token in tokens: 
+        token_type = token[0]
 
 ////// jacobs part next
 
@@ -150,7 +158,7 @@ def evaluate_line(line):
         if tokens[position][0] != "END":
             raise ValueError
 
-        answer = calculate(tree)
+        answer = calculate(tree) 
 
         return {
             "input": line,
