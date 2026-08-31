@@ -130,7 +130,7 @@ return "(" + tree[0] + " " + tree_string(tree[1]) + " " + tree_string(tree[2]) +
 def token_string(tokens):
     answer = []
 
-    for token in tokens: 
+    for token in tokens: # It will go through each token one at a time 
         token_type = token[0]
         value = token[1]
 
@@ -139,7 +139,7 @@ def token_string(tokens):
         else: 
             answer.append("[" + token_type + ":" + value + "]")
 
-    return " ".join(answer) 
+    return " ".join(answer)  # This will put a space in between each token 
 
 
 ////// jacobs part next
@@ -172,4 +172,43 @@ def evaluate_line(line):
             "tree": tree_string(tree),
             "tokens": token_string (tokens),
             "result": answer}
-    
+
+# Markos Part Nexttt ///////////
+
+# This block of code function will read the input file provided and create the output file 
+def evaluate_file(input_path: str):
+
+    results = []
+
+    with open(input_path, "r") as file:
+        lines = file.readlines()
+
+    for line in lines: 
+        expression-text = line.rstrip("\n") 
+        answer = evaluate_line(expression_text) 
+
+        results.append(answer)
+
+    if folder == "": 
+        output_path = "output.txt" 
+    else: 
+        output_path = os.path.join(folder, "output.txt") 
+    with open(output_path, "w") as file: 
+
+        for results in results: 
+
+            file.write("Input: " + result["input"] + "\n")
+            file.write("Tree: " + result["tree"] + "\n")
+            file.write("Tokens: " + result["tokens"] + "\n") 
+            if result["result"] == "ERROR" : 
+                file.write("Result: ERROR\n")
+            else: 
+                file.write("Result: " + result_string(result["result"]) + "\n")
+
+            file.write("\n") 
+
+    return results
+
+# This block of code will run the  program 
+if __name__ == "__main__":
+    evaluate_file("sample_input.txt") 
