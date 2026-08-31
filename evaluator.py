@@ -126,16 +126,23 @@ if tree[0] == "neg":
     return "(neg " + tree_string(tree[1]) + ")"
 return "(" + tree[0] + " " + tree_string(tree[1]) + " " + tree_string(tree[2]) + ")" 
 
-
 #changes tokens into required format
 def token_string(tokens):
     answer = []
 
     for token in tokens: 
         token_type = token[0]
+        value = token[1]
+
+        if token_type == "END"; 
+            answer.append("[END]")
+        else: 
+            answer.append("[" + token_type + ":" + value + "]")
+
+    return " ".join(answer) 
+
 
 ////// jacobs part next
-
 
 # makes the result look like the required format
 def result_string(number):
