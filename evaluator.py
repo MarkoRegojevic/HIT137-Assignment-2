@@ -32,7 +32,8 @@ if char.isdigit():
     continue
 
  #   This block will deal wit the plus and minus
- def expression(tokens, position): 
+def expression(tokens, position): 
+
     left, position = term(tokens, position)
 
     while tokens [position][0] == "OP" and tokens [position][1] in ("+", "-"):
@@ -62,7 +63,7 @@ while true:
 
     return left, position
 
-/////////////// #jacobs part next
+ #jacobs part next
 
 # This block deals with negative numbers 
 def unary(tokens, position):
@@ -81,19 +82,21 @@ def power (tokens, position):
     left, position = primary(tokens, position)
 
     if tokens[position][0] == "OP":
+
         if tokens[position][1] == "^":
+
             right, position = unary(tokens, position +1)
             left = ("^", left, right)
 
     return left, position
 
 #This block deals with numbers and brackets 
-def primary (tokens, position)
+def primary (tokens, position):
 
     token = tokens[position]
 
     #number
-    if token[0] == "NUM"
+    if token[0] == "NUM":
         number = float(token[1])
         return number, position + 1
 
@@ -109,7 +112,8 @@ def primary (tokens, position)
     raise ValueError()
 
 
-////// markos part next
+ #markos part next
+
 #This function block of code will work out the answer from the tree 
 def calculate(tree): 
 
@@ -159,7 +163,7 @@ def token_string(tokens):
         token_type = token[0]
         value = token[1]
 
-        if token_type == "END"; 
+        if token_type == "END": 
             answer.append("[END]")
         else: 
             answer.append("[" + token_type + ":" + value + "]")
@@ -167,7 +171,7 @@ def token_string(tokens):
     return " ".join(answer)  # This will put a space in between each token 
 
 
-////// jacobs part next
+# jacobs part next
 
 # makes the result look like the required format
 def result_string(number):
