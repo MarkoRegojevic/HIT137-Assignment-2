@@ -1,35 +1,56 @@
 import os
 
-# makes the tokens from expression
+# Makes the tokens from expression
 def tokenize(text):
-
+    tokens = []
     i=0
+
     while i < len(text):
 
-        char=text[i]
+        char = text[i]
 
-if char.isspace():
-    i +=1 
-    continue
+        if char.isspace():
+            i +=1 
+            continue
 
-if char.isdigit():
+        if char.isdigit():
 
-    start=i
+            start = i
 
-    while i < len(text) and text[i].isdigit():
-       i+= 1
+            while i < len(text) and text[i].isdigit():
+            i += 1
 
-    if i < len(text) and text[i] == '.':
-        i+= 1
+            if i < len(text) and text[i] == '.':
+                i += 1
 
-        if i>= len(text) or not text[i].isdigit():
-            raise ValueError (f"bad number format at position {start}")
+                if i>= len(text) or not text[i].isdigit():
+                    raise ValueError()
 
-        while i< len(text) or not text[i].isdigit():
-            i+= 1
+                while i< len(text) or not text[i].isdigit():
+                    i+= 1
 
-    tokens.append(('NUMBER', float(text[start:i])))
-    continue
+            tokens.append(("NUM", text[start:i]))
+            continue
+
+        if char in "+-*/%^":
+            token.append(("OP",char))
+            i += 1 
+            continue
+
+        if char == "(": 
+            tokens.append(("LPAREN", cahr))
+            i += 1 
+            continue
+        if char == ")":
+            tokens.append(("RPAREN", char))
+            i += 1 
+            continue
+
+        raise ValueError()
+
+tokens.append(("END", ""))
+return tokens 
+
 
  #   This block will deal wit the plus and minus
 def expression(tokens, position): 
@@ -40,28 +61,30 @@ def expression(tokens, position):
         operator = tokens[position][1]
         right, position = term(tokens, position + 1)
         left = (operator, left, right)
+
     return left, position 
 
 # This block will deal with multuplication, division and remainder, and also implicit multiplication. . 
 def term(tokens, position): 
+
     left, position = unary(tokens, position) 
 
-while true: 
-    if tokens[position][0] == "OP" and tokens[position][1] in ("*", "/", "%"):
-        operator = tokens[position][1]
-        right, position = unary(tokens, position + 1)
-        left = (operator, left, right)
+    while True: 
+        if tokens[position][0] == "OP" and tokens[position][1] in ("*", "/", "%"):
+            operator = tokens[position][1]
+            right, position = unary(tokens, position + 1)
+            left = (operator, left, right)
 
-    elif tokens[position][0] == "NUM" :
-        raise ValueError()
-    
-    elif tokens[position][0] == "LPAREN":
-        right, position = unary(tokens, position)
-        left = ("*", left, right) 
-    else: 
-        break
+        elif tokens[position][0] == "NUM" :
+            raise ValueError()
+        
+        elif tokens[position][0] == "LPAREN":
+            right, position = unary(tokens, position)
+            left = ("*", left, right) 
+        else: 
+            break
 
-    return left, position
+        return left, position
 
  #jacobs part next
 
@@ -102,7 +125,7 @@ def primary (tokens, position):
 
     #brackets
     if token[0] == "LPAREN":
-        answer, position == expression(tokens, position + 1)
+        answer, position = expression(tokens, position + 1)
 
         if tokens[position][0] != "RPAREN":
             raise ValueError()
@@ -147,13 +170,17 @@ def calculate(tree):
 
 # This function block of code will chagne the tree into the format for the output file 
 def tree_string(tree): 
-    if isinstance(tree, float):
-        return str(tree)
 
-    return str(tree)
-if tree[0] == "neg":
-    return "(neg " + tree_string(tree[1]) + ")"
-return "(" + tree[0] + " " + tree_string(tree[1]) + " " + tree_string(tree[2]) + ")" 
+    if isinstance(tree, float):
+
+        if tree.is_integer():
+            return str(int(tree))
+
+        return str(tree)
+    
+    if tree[0] == "neg":
+        return "(neg " + tree_string(tree[1]) + ")"
+    return "(" + tree[0] + " " + tree_string(tree[1]) + " " + tree_string(tree[2]) + ")" 
 
 #changes tokens into required format
 def token_string(tokens):
@@ -182,7 +209,9 @@ def result_string(number):
 
 # evalutes one line
 def evaluate_line(line):
+
     try: 
+
         tokens = tokenize(line)
 
         if len(tokens) == 1:
@@ -200,7 +229,16 @@ def evaluate_line(line):
             "input": line,
             "tree": tree_string(tree),
             "tokens": token_string (tokens),
-            "result": answer}
+            "result": answer
+        }
+    except (ValueError, ZeroDivisionError, OverflowError):
+
+        return {
+            "input": line,
+            "tree": "ERROR",
+            "tokens": "ERROR",
+            "result": "ERROR"
+        }
 
 # Markos Part Nexttt ///////////
 
@@ -213,10 +251,12 @@ def evaluate_file(input_path: str):
         lines = file.readlines()
 
     for line in lines: 
-        expression-text = line.rstrip("\n") 
+        expression_text = line.rstrip("\n") 
         answer = evaluate_line(expression_text) 
 
         results.append(answer)
+
+folder= os.path.dirname(input_path) 
 
     if folder == "": 
         output_path = "output.txt" 
