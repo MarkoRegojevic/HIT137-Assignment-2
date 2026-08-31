@@ -79,9 +79,25 @@ def power (tokens, position):
     return left, position
 
 #This block deals with numbers and brackets 
+def primary (tokens, position)
 
+    token = tokens[position]
 
+    #number
+    if token[0] == "NUM"
+        number = float(token[1])
+        return number, position + 1
 
+    #brackets
+    if token[0] == "LPAREN":
+        answer, position == expression(tokens, position + 1)
+
+        if tokens[position][0] != "RPAREN":
+            raise ValueError()
+
+        return answer, position +1
+
+    raise ValueError()
 
 
 ////// markos part next
