@@ -251,32 +251,36 @@ def evaluate_file(input_path: str):
         lines = file.readlines()
 
     for line in lines: 
+
         expression_text = line.rstrip("\n") 
         answer = evaluate_line(expression_text) 
 
         results.append(answer)
 
-folder= os.path.dirname(input_path) 
+        folder = os.path.dirname(input_path) 
 
-    if folder == "": 
-        output_path = "output.txt" 
-    else: 
-        output_path = os.path.join(folder, "output.txt") 
-    with open(output_path, "w") as file: 
+        if folder == "": 
+            output_path = "output.txt" 
+        else: 
+            output_path = os.path.join(folder, "output.txt") 
 
-        for results in results: 
+        with open(output_path, "w") as file: 
 
-            file.write("Input: " + result["input"] + "\n")
-            file.write("Tree: " + result["tree"] + "\n")
-            file.write("Tokens: " + result["tokens"] + "\n") 
-            if result["result"] == "ERROR" : 
-                file.write("Result: ERROR\n")
-            else: 
-                file.write("Result: " + result_string(result["result"]) + "\n")
+            for i in range(len(results)):
 
-            file.write("\n") 
+                file.write("Input: " + result["input"] + "\n")
+                file.write("Tree: " + result["tree"] + "\n")
+                file.write("Tokens: " + result["tokens"] + "\n") 
 
-    return results
+                if result["result"] == "ERROR" : 
+                    file.write("Result: ERROR\n")
+                else: 
+                    file.write("Result: " + result_string(result["result"]) + "\n")
+
+                if i < len(results) - 1: 
+                    file.write("\n")
+
+        return results
 
 # This block of code will run the  program 
 if __name__ == "__main__":
