@@ -6,7 +6,6 @@ def tokenize(text):
     i=0
 
     while i < len(text):
-
         char = text[i]
 
         if char.isspace():
@@ -26,7 +25,7 @@ def tokenize(text):
                 if i>= len(text) or not text[i].isdigit():
                     raise ValueError()
 
-                while i < len(text) and not text[i].isdigit():
+                while i < len(text) and text[i].isdigit():
                     i+= 1
 
             tokens.append(("NUM", text[start:i]))
