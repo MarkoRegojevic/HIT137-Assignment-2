@@ -52,7 +52,7 @@ def tokenize(text):
     return tokens 
 
 
- #   This block will deal wit the plus and minus
+ #  This block will deal with the plus and minus
 def expression(tokens, position): 
 
     left, position = term(tokens, position)
@@ -64,7 +64,7 @@ def expression(tokens, position):
 
     return left, position 
 
-# This block will deal with multuplication, division and remainder, and also implicit multiplication. . 
+# This block will deal with multuplication, division and remainder, and also implicit multiplication.
 def term(tokens, position): 
 
     left, position = unary(tokens, position) 
@@ -137,9 +137,11 @@ def primary (tokens, position):
 #This function block of code will work out the answer from the tree 
 def calculate(tree): 
 
-    if isinstance(tree, float): #If the tree is jsut a number then return the number
+    if isinstance(tree, float): 
+        #If the tree is jsut a number then return the number
         return tree
-    if tree[0] == "neg": #If the tree is a negative number then return the negative of the number
+    if tree[0] == "neg": 
+        #If the tree is a negative number then return the negative of the number
         return -calculate(tree[1])
 
     operator = tree[0] 
@@ -165,7 +167,7 @@ def calculate(tree):
 
     raise ValueError() # So if none of the above conditions work, then there will be an error
 
-# This function block of code will chagne the tree into the format for the output file 
+# This function block of code will change the tree into the format for the output file 
 def tree_string(tree): 
 
     if isinstance(tree, float):
@@ -179,11 +181,11 @@ def tree_string(tree):
         return "(neg " + tree_string(tree[1]) + ")"
     return "(" + tree[0] + " " + tree_string(tree[1]) + " " + tree_string(tree[2]) + ")" 
 
-#changes tokens into required format
+# changes tokens into required format
 def token_string(tokens):
     answer = []
 
-    for token in tokens: # It will go through each token one at a time 
+    for token in tokens: # it will go through each token one at a time 
         token_type = token[0]
         value = token[1]
 
@@ -193,7 +195,6 @@ def token_string(tokens):
             answer.append("[" + token_type + ":" + value + "]")
 
     return " ".join(answer)  # This will put a space in between each token 
-
 
 
 # makes the result look like the required format
@@ -274,6 +275,6 @@ def evaluate_file(input_path: str):
 
     return results
 
-# This block of code will run the  program 
+# This block of code will run the program 
 if __name__ == "__main__":
     evaluate_file("sample_input.txt") 
