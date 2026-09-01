@@ -86,7 +86,6 @@ def term(tokens, position):
 
     return left, position
 
- #jacobs part next
 
 # This block deals with negative numbers 
 def unary(tokens, position):
@@ -134,8 +133,6 @@ def primary (tokens, position):
 
     raise ValueError()
 
-
- #markos part next
 
 #This function block of code will work out the answer from the tree 
 def calculate(tree): 
@@ -198,7 +195,6 @@ def token_string(tokens):
     return " ".join(answer)  # This will put a space in between each token 
 
 
-# jacobs part next
 
 # makes the result look like the required format
 def result_string(number):
@@ -240,7 +236,6 @@ def evaluate_line(line):
             "result": "ERROR"
         }
 
-# Markos Part Nexttt ///////////
 
 # This block of code function will read the input file provided and create the output file 
 def evaluate_file(input_path: str):
