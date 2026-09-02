@@ -12,7 +12,7 @@ This repository contains our work for HIT137 Group Assignment 2.
 
 Marko and Jacob worked on Question 2 (evaluator.py).
 
-Tri Vo completed Question 1 (cipher.py) on his own seperate document and then sent it to me (Marko Regojevic). Whcih I then uploaded the completed code to to the cipher.py file in the group Assignment 2 Folder. 
+Tri Vo completed Question 1 (cipher.py) on his own seperate document and then sent it to me (Marko Regojevic). Which I then uploaded the completed code to to the cipher.py file in the group Assignment 2 Folder. 
 
 ## Files
 
