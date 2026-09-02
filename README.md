@@ -20,3 +20,6 @@ Tri Vo completed Question 1 (cipher.py) on his own seperate document and then se
 - evaluator.py - Question 2 mathematical expression evaluator
 - raw_text.txt - Input file for Question 1
 - input.txt - Input file for Question 2 
+- encrypted_text.txt - Encrypted output 
+- decrypted_text.txt - Decrypted output 
+- output.txt - Question 2 results after evaluator.py is run
