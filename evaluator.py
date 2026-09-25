@@ -233,7 +233,7 @@ def evaluate_line(line):
             "input": line,
             "tree": "ERROR",
             "tokens": "ERROR",
-            "result": "ERROR"
+            "result": "ERROR" 
         }
 
 
